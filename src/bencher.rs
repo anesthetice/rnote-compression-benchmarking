@@ -79,7 +79,7 @@ where
             .margin(10)
             .x_label_area_size(40)
             .y_label_area_size(50)
-            .build_cartesian_2d(0f64..30f64, 0f64..1f64)
+            .build_cartesian_2d(0f64..30f64, 0f64..0.4f64)
             .unwrap();
 
         comp_size_decomp_time_chart
@@ -140,6 +140,7 @@ where
         }
         decomp_size_comp_size_chart
             .configure_series_labels()
+            .position(SeriesLabelPosition::UpperLeft)
             .label_font(("sans-serif", 20).into_font())
             .border_style(BLACK)
             .draw()

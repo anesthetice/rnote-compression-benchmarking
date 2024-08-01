@@ -34,17 +34,13 @@ fn main() {
 
     let bencher = Bencher::new(
         vec![
-            Bfunc::new("gzip-1", comp::gzip(1), decomp::gzip),
-            /*
-            Bfunc::new("gzip-2", comp::gzip(2), decomp::gzip),
-            Bfunc::new("gzip-3", comp::gzip(3), decomp::gzip),
-            Bfunc::new("gzip-4", comp::gzip(4), decomp::gzip),
-            Bfunc::new("gzip-5", comp::gzip(5), decomp::gzip),
-            Bfunc::new("gzip-6", comp::gzip(6), decomp::gzip),
-            Bfunc::new("gzip-7", comp::gzip(7), decomp::gzip),
-            Bfunc::new("gzip-8", comp::gzip(8), decomp::gzip),
-            Bfunc::new("gzip-9", comp::gzip(9), decomp::gzip),
-            */
+            Bfunc::new("gzip-5", comp::gzip(5), decomp::gzip()),
+            Bfunc::new(
+                "brotli-4-4096-24",
+                comp::brotli(4, 4096, 24),
+                decomp::brotli(),
+            ),
+            Bfunc::new("zstd-6", comp::zstd(6), decomp::zstd()),
         ],
         vec![
             &decomp_1, &decomp_2, &decomp_3, &decomp_4, &decomp_5, &decomp_6, &decomp_7, &decomp_8,
@@ -52,5 +48,17 @@ fn main() {
         ],
     );
 
-    bencher.run(3);
+    bencher.run(10);
 }
+
+/*
+Bfunc::new("gzip-1", comp::gzip(1), decomp::gzip),
+Bfunc::new("gzip-2", comp::gzip(2), decomp::gzip),
+Bfunc::new("gzip-3", comp::gzip(3), decomp::gzip),
+Bfunc::new("gzip-4", comp::gzip(4), decomp::gzip),
+Bfunc::new("gzip-5", comp::gzip(5), decomp::gzip),
+Bfunc::new("gzip-6", comp::gzip(6), decomp::gzip),
+Bfunc::new("gzip-7", comp::gzip(7), decomp::gzip),
+Bfunc::new("gzip-8", comp::gzip(8), decomp::gzip),
+Bfunc::new("gzip-9", comp::gzip(9), decomp::gzip),
+*/
