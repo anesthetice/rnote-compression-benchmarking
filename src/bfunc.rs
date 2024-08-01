@@ -25,9 +25,9 @@ where
     }
     pub fn bench(&self, uncompressed_input_data: &[u8], num_of_samples: u8) -> BenchResult {
         println!("--  Benchmarking '{}'  --", self.title);
+
         println!("warming up...");
         let compressed_input_data = (self.compressor)(uncompressed_input_data);
-
         println!("compressing...");
         let mut durations: Vec<Duration> = Vec::new();
         for _ in 0..num_of_samples {
@@ -37,9 +37,9 @@ where
         }
         let median_comp_time = Self::median(durations).as_secs_f64();
         println!("median compression time: {:.8}", median_comp_time);
+
         println!("warming up...");
         (self.decompressor)(&compressed_input_data);
-
         println!("decompressing...");
         let mut durations: Vec<Duration> = Vec::new();
         for _ in 0..num_of_samples {

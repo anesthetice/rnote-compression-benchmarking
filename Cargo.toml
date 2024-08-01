@@ -5,8 +5,9 @@ edition = "2021"
 
 [dependencies]
 flate2 = { version = "1.0.*" }
-plotters = { version = "0.3" }
 itertools = { version = "0.13" }
+plotters = { version = "0.3" }
+sysinfo = { version = "0.31" }
 
 [profile.release]
 codegen-units = 1

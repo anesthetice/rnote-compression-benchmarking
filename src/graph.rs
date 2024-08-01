@@ -22,3 +22,37 @@ pub const COLOR_WHEEL: [RGBColor; 20] = [
     RGBColor(0xda, 0x70, 0xd6),
     RGBColor(0xfa, 0x80, 0x72),
 ];
+
+// taken from Syracuse
+pub mod interpolation {
+    use itertools::Itertools;
+
+    // plotters.rs has a lineseries options but I dislike it as the width is not consistent depending on the slope
+    // this method gives us a more consistent line width
+    pub fn linear(points: Vec<(f64, f64)>) -> Vec<(f64, f64)> {
+        let nb_points = 1000;
+        points
+            .into_iter()
+            .tuple_windows()
+            .map(|((x_i, y_i), (x_ip1, y_ip1))| {
+                let mut local_points: Vec<(f64, f64)> = Vec::new();
+
+                let a = (y_ip1 - y_i) / (x_ip1 - x_i);
+                let b = y_i - a * x_i;
+                let f = move |x: f64| a * x + b;
+
+                // lots of "off-by-one" bs but it's not really important
+                let step_size = (x_ip1 - x_i) / nb_points as f64;
+                let mut x = x_i;
+                while x < x_ip1 {
+                    local_points.push((x, f(x)));
+                    x += step_size;
+                }
+                local_points
+            })
+            .fold(Vec::new(), |mut global_points, local_points| {
+                global_points.extend(local_points);
+                global_points
+            })
+    }
+}
