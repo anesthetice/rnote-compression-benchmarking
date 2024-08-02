@@ -6,6 +6,7 @@ edition = "2021"
 [dependencies]
 brotli = { version = "6.0" }
 flate2 = { version = "1.0" }
+gzp = { version = "0.11" }
 itertools = { version = "0.13" }
 plotters = { version = "0.3" }
 sysinfo = { version = "0.31" }
