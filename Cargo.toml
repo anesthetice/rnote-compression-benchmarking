@@ -10,7 +10,7 @@ gzp = { version = "0.11" }
 itertools = { version = "0.13" }
 plotters = { version = "0.3" }
 sysinfo = { version = "0.31" }
-zstd = { version = "0.13" }
+zstd = { version = "0.13", features = ["zstdmt"] }
 
 [profile.release]
 codegen-units = 1

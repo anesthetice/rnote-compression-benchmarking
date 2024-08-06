@@ -28,7 +28,7 @@ where
         .first()
         .unwrap()
         .brand()
-        .replace(" ", "_");
+        .replace(' ', "_");
 
         let mut title = self
             .functions
@@ -128,7 +128,9 @@ where
                         .into_iter()
                         .map(|coord| Circle::new(coord, 1, color.stroke_width(1))),
                 )
-                .unwrap();
+                .unwrap()
+                .label(bfunc.title)
+                .legend(move |(x, y)| Circle::new((x + 10, y), 7, color.stroke_width(2)));
 
             comp_size_decomp_time_chart
                 .draw_series(
@@ -136,8 +138,11 @@ where
                         .into_iter()
                         .map(|coord| Circle::new(coord, 1, color.stroke_width(1))),
                 )
-                .unwrap();
+                .unwrap()
+                .label(bfunc.title)
+                .legend(move |(x, y)| Circle::new((x + 10, y), 7, color.stroke_width(2)));
         }
+
         decomp_size_comp_size_chart
             .configure_series_labels()
             .position(SeriesLabelPosition::UpperLeft)
@@ -145,6 +150,23 @@ where
             .border_style(BLACK)
             .draw()
             .unwrap();
+
+        decomp_size_comp_time_chart
+            .configure_series_labels()
+            .position(SeriesLabelPosition::UpperLeft)
+            .label_font(("sans-serif", 20).into_font())
+            .border_style(BLACK)
+            .draw()
+            .unwrap();
+
+        comp_size_decomp_time_chart
+            .configure_series_labels()
+            .position(SeriesLabelPosition::UpperLeft)
+            .label_font(("sans-serif", 20).into_font())
+            .border_style(BLACK)
+            .draw()
+            .unwrap();
+
         root.present().unwrap();
     }
 }

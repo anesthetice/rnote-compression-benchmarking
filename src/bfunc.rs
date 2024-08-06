@@ -50,22 +50,21 @@ where
         let median_decomp_time = Self::median(durations).as_secs_f64();
         println!("median decompression time: {:.8}", median_decomp_time);
 
-        let decomp_size_MB = uncompressed_input_data.len() as f64 / 1e6;
-        let comp_size_MB = compressed_input_data.len() as f64 / 1e6;
+        let decomp_size_mb = uncompressed_input_data.len() as f64 / 1e6;
+        let comp_size_mb = compressed_input_data.len() as f64 / 1e6;
 
         BenchResult {
-            decomp_size_comp_size: (decomp_size_MB, comp_size_MB),
-            decomp_size_comp_time: (decomp_size_MB, median_comp_time),
-            comp_size_decomp_time: (comp_size_MB, median_decomp_time),
+            decomp_size_comp_size: (decomp_size_mb, comp_size_mb),
+            decomp_size_comp_time: (decomp_size_mb, median_comp_time),
+            comp_size_decomp_time: (comp_size_mb, median_decomp_time),
         }
     }
 
     fn median(mut input: Vec<Duration>) -> Duration {
         input.sort();
         let n = input.len();
-
         // if n is odd
-        if n % 2 == 1 {
+        if input.len() % 2 == 1 {
             input.remove((n + 1) / 2)
         }
         // if n is even

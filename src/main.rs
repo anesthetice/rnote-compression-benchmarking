@@ -42,6 +42,7 @@ fn main() {
             ),
             Bfunc::new("zstd-6", comp::zstd(6), decomp::zstd()),
             Bfunc::new("par-gzip-8", comp::par_gzip(8), decomp::gzip()),
+            Bfunc::new("par-zstd-9", comp::par_zstd(9), decomp::zstd()),
         ],
         vec![
             &decomp_1, &decomp_2, &decomp_3, &decomp_4, &decomp_5, &decomp_6, &decomp_7, &decomp_8,
@@ -49,16 +50,5 @@ fn main() {
         ],
     );
 
-    bencher.run(20);
+    bencher.run(16);
 }
-
-/*
-Bfunc::new("gzip-5", comp::gzip(5), decomp::gzip()),
-Bfunc::new(
-    "brotli-4-4096-24",
-    comp::brotli(4, 4096, 24),
-    decomp::brotli(),
-),
-Bfunc::new("zstd-6", comp::zstd(6), decomp::zstd()),
-Bfunc::new("par-gzip-8", comp::par_gzip(8), decomp::gzip()),
-*/

@@ -35,6 +35,15 @@ pub fn zstd(level: i32) -> CompFunc {
     })
 }
 
+pub fn par_zstd(level: i32) -> CompFunc {
+    Box::new(move |data: &[u8]| {
+        let mut encoder = zstd::Encoder::new(Vec::<u8>::new(), level).unwrap();
+        encoder.multithread(12).unwrap();
+        encoder.write_all(data).unwrap();
+        encoder.finish().unwrap()
+    })
+}
+
 pub fn par_gzip(level: u32) -> CompFunc {
     Box::new(move |data: &[u8]| {
         let compressed: Goofy = Goofy::new();

@@ -1,6 +1,8 @@
 use std::io::Read;
 
-pub fn gzip() -> Box<dyn Fn(&[u8])> {
+pub type DecompFunc = Box<dyn Fn(&[u8])>;
+
+pub fn gzip() -> DecompFunc {
     Box::new(move |compressed| {
         let mut bytes: Vec<u8> = {
             let mut decompressed_size: [u8; 4] = [0; 4];
@@ -12,7 +14,7 @@ pub fn gzip() -> Box<dyn Fn(&[u8])> {
     })
 }
 
-pub fn brotli() -> Box<dyn Fn(&[u8])> {
+pub fn brotli() -> DecompFunc {
     Box::new(move |compressed| {
         let mut bytes: Vec<u8> = Vec::new();
         let mut decoder = brotli::Decompressor::new(compressed, 4096);
@@ -20,7 +22,7 @@ pub fn brotli() -> Box<dyn Fn(&[u8])> {
     })
 }
 
-pub fn zstd() -> Box<dyn Fn(&[u8])> {
+pub fn zstd() -> DecompFunc {
     Box::new(move |compressed| {
         let mut bytes: Vec<u8> = Vec::new();
         let mut decoder = zstd::Decoder::new(compressed).unwrap();
