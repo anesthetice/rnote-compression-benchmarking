@@ -35,10 +35,10 @@ pub fn zstd(level: i32) -> CompFunc {
     })
 }
 
-pub fn par_zstd(level: i32) -> CompFunc {
+pub fn par_zstd(level: i32, num_workers: u32) -> CompFunc {
     Box::new(move |data: &[u8]| {
         let mut encoder = zstd::Encoder::new(Vec::<u8>::new(), level).unwrap();
-        encoder.multithread(12).unwrap();
+        encoder.multithread(num_workers).unwrap();
         encoder.write_all(data).unwrap();
         encoder.finish().unwrap()
     })
