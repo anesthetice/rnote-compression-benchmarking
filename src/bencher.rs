@@ -47,7 +47,7 @@ where
             .margin(10)
             .x_label_area_size(40)
             .y_label_area_size(50)
-            .build_cartesian_2d(0f64..130f64, 0f64..30f64)
+            .build_cartesian_2d(0f64..215f64, 0f64..32f64)
             .unwrap();
 
         decomp_size_comp_size_chart
@@ -63,7 +63,7 @@ where
             .margin(10)
             .x_label_area_size(40)
             .y_label_area_size(50)
-            .build_cartesian_2d(0f64..130f64, 0f64..5f64)
+            .build_cartesian_2d(0f64..215f64, 0f64..6f64)
             .unwrap();
 
         decomp_size_comp_time_chart
@@ -79,7 +79,7 @@ where
             .margin(10)
             .x_label_area_size(40)
             .y_label_area_size(50)
-            .build_cartesian_2d(0f64..30f64, 0f64..0.4f64)
+            .build_cartesian_2d(0f64..32f64, 0f64..0.5f64)
             .unwrap();
 
         comp_size_decomp_time_chart

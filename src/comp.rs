@@ -56,6 +56,10 @@ pub fn par_gzip(level: u32) -> CompFunc {
     })
 }
 
+pub fn par_zstd_opt() -> CompFunc {
+    Box::new(move |data: &[u8]| crate::zstd_impl::compress_to_zstd(data).unwrap())
+}
+
 use std::sync::{Arc, RwLock};
 
 struct Goofy {

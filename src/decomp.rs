@@ -29,3 +29,9 @@ pub fn zstd() -> DecompFunc {
         decoder.read_to_end(&mut bytes).unwrap();
     })
 }
+
+pub fn zstd_opt() -> DecompFunc {
+    Box::new(move |compressed| {
+        crate::zstd_impl::decompress_from_zstd(compressed).unwrap();
+    })
+}
