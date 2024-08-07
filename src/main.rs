@@ -1,3 +1,5 @@
+use std::io::Write;
+
 use bencher::Bencher;
 use bfunc::Bfunc;
 use utils::decompress_default;
@@ -8,6 +10,7 @@ mod comp;
 mod decomp;
 mod graph;
 mod utils;
+mod zstd_dict;
 
 const COMP_1: &[u8] = include_bytes!("../files/1.rnote");
 const COMP_2: &[u8] = include_bytes!("../files/2.rnote");
@@ -21,6 +24,22 @@ const COMP_9: &[u8] = include_bytes!("../files/9.rnote");
 const COMP_10: &[u8] = include_bytes!("../files/10.rnote");
 
 fn main() {
+    bench_stuff()
+}
+
+fn create_dict() {
+    let dict = crate::zstd_dict::train(None, "./files/dict/".as_ref());
+    std::fs::OpenOptions::new()
+        .create(true)
+        .write(true)
+        .truncate(true)
+        .open("rnote.dict")
+        .unwrap()
+        .write_all(&dict)
+        .unwrap();
+}
+
+fn bench_stuff() {
     let decomp_1 = decompress_default(COMP_1);
     let decomp_2 = decompress_default(COMP_2);
     let decomp_3 = decompress_default(COMP_3);
@@ -56,5 +75,5 @@ fn main() {
         ],
     );
 
-    bencher.run(16);
+    bencher.run(5);
 }
