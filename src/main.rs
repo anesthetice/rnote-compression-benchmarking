@@ -12,6 +12,7 @@ mod graph;
 mod utils;
 mod zstd_dict;
 mod zstd_impl;
+mod zstd_impl_debug;
 
 const COMP_1: &[u8] = include_bytes!("../files/1.rnote");
 const COMP_2: &[u8] = include_bytes!("../files/2.rnote");
@@ -26,7 +27,13 @@ const COMP_10: &[u8] = include_bytes!("../files/10.rnote");
 const COMP_11: &[u8] = include_bytes!("../files/11.rnote");
 
 fn main() {
-    bench_stuff();
+    for (idx, &elem) in COMP_1[0..10].iter().enumerate() {
+        println!("{:0>2} - {:0>8b} | {:0>2x}", idx, elem, elem)
+    }
+    for (idx, &elem) in COMP_2[0..10].iter().enumerate() {
+        println!("{:0>2} - {:0>8b} | {:0>2x}", idx, elem, elem)
+    }
+    zstd_impl_debug::test();
 }
 
 fn bench_stuff() {

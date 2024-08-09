@@ -9,9 +9,9 @@ pub fn decompress_from_zstd(compressed: &[u8]) -> Result<Vec<u8>, anyhow::Error>
                 .context("Failed to get the frame header descriptor of the file"),
         )?;
 
-        //for (idx, &elem) in compressed[0..15].iter().enumerate() {
-        //    println!("{:0>2} - {:0>8b} | {:0>2x}", idx, elem, elem)
-        //}
+        for (idx, &elem) in compressed[0..15].iter().enumerate() {
+            println!("{:0>2} - {:0>8b} | {:0>2x}", idx, elem, elem)
+        }
         let frame_content_size_flag = frame_header_descriptor >> 6;
         let single_segment_flag = (frame_header_descriptor >> 5) & 1;
         let dictionary_id_flag = frame_header_descriptor & 11;
@@ -65,7 +65,7 @@ pub fn decompress_from_zstd(compressed: &[u8]) -> Result<Vec<u8>, anyhow::Error>
             4.. => unreachable!(),
         }
     };
-    //println!("{}", bytes.capacity());
+    println!("{}", bytes.capacity());
     let mut decoder = zstd::Decoder::new(compressed)?;
     decoder.read_to_end(&mut bytes)?;
     Ok(bytes)
