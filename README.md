@@ -1,3 +1,15 @@
+## Usage
+* clone this repository
+* download files.7z from the releases
+* extract the .rnote files into src/files
+* cargo run --release
+
+The program will then run through two sets of benchmarks:
+* general benchmarks (gzip, brotli, zstd)
+* zstd benchmarks (zstd-3 to zstd-16)
+
+This will take around 25 minutes (sorry)
+
 ## Zstd
 * zstd seems to be the best option, good speed on compression and decompression, good ratio, multi-threading supported and easy to use
 * compression of 9 (out of 21) seems to be ideal
