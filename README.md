@@ -1,8 +1,9 @@
 ## Usage
 * clone this repository
+* cd into the repo root directory
 * download files.7z from the releases
-* extract the .rnote files into src/files
-* cargo run --release
+* extract and place the .rnote files into `./files`
+* run `cargo run --release`
 
 The program will then run through two sets of benchmarks:
 * general benchmarks (gzip, brotli, zstd)

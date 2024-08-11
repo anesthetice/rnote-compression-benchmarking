@@ -50,7 +50,7 @@ fn bench() {
 
     let gen_bencher = Bencher::new(
         vec![
-            Bfunc::new("gzip-5 (current)", comp::gzip(5), decomp::gzip()),
+            Bfunc::new("gzip-5-(current)", comp::gzip(5), decomp::gzip()),
             Bfunc::new(
                 "brotli-2-4096-24",
                 comp::brotli(2, 4096, 24),
